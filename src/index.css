@@ -7,4 +7,5 @@
 body {
   font-family: 'Poppins', sans-serif;
 }
-@import "./CSS/Components/Homepage.css";
+@import "./CSS/Pages/Homepage.css";
+@import "./CSS/Components/Strip.css";
