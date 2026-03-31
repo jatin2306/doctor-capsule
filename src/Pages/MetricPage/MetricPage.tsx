@@ -1,22 +1,22 @@
 const MetricPage = () => {
   return (
-    <section className="bg-[#F7F7F7] py-16">
+    <section className="bg-white py-16">
       <div className="mx-auto grid max-w-6xl gap-12 px-6 lg:grid-cols-2">
         <div className="mt-10">
           <h2 className="text-2xl font-semibold text-[#111827]">
             Trusted Healthcare in Numbers
           </h2>
-          <p className="mt-4 max-w-lg text-sm leading-2 text-black/45">
+          <p className="mt-4 max-w-none text-[13px] leading-6 text-black/45">
             Connecting patients with experienced doctors and trusted clinics,
             our platform makes it easy to access quality healthcare services
             without any hassle.
           </p>
-          <p className="mt-4 max-w-xl text-sm leading-2 text-black/45">
+          <p className="mt-4 max-w-none text-[13px] leading-6 text-black/45">
             With a strong network of medical professionals and facilities, we
             ensure that you receive reliable guidance, timely consultations and
             the care you deserve.
           </p>
-          <p className="mt-4 max-w-xl text-sm leading-2 text-black/45">
+          <p className="mt-4 max-w-none text-[13px] leading-6 text-black/45">
             Supported by 24/7 assistance.
           </p>
 

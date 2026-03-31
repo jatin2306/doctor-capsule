@@ -3,6 +3,7 @@ import Home from "../Home/Home";
 import Services from "../Services/Services";
 import WellnessStrip from "../../Components/Strip/WellnessStrip";
 import MetricPage from "../MetricPage/MetricPage";
+import Footer from "../../Components/Footer/Footer";
 const Homepage = () => {
   return (
     <div className="min-h-screen bg-white font-sans">
@@ -18,6 +19,7 @@ const Homepage = () => {
       </div>
 
       <MetricPage />
+      <Footer />
     </div>
   );
 };
