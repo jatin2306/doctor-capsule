@@ -1,7 +1,8 @@
-import Ambulance from "../../Assets/Ambulance.png";
+import { Ambulance } from "../../Assets/Index";
+import { SearchIcon } from "../../Assets/SVG/Index";
 import Button from "../../Utilities/Button/Button";
 import Input from "../../Utilities/Input/Input";
-import SearchIcon from "../../Components/SVG-Icons/SearchIcon";
+
 import { useState } from "react";
 const Home = () => {
   const [query, setQuery] = useState("");

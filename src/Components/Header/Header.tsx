@@ -1,7 +1,10 @@
 import React from "react";
 import Button from "../../Utilities/Button/Button";
+import { useNavigate } from "react-router-dom";
 
 const Header: React.FC = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="w-full border-white/50 pt-4">
       <div className="mx-auto mt-3 flex max-w-7xl items-center justify-between gap-8 px-4 pb-4">
@@ -17,7 +20,7 @@ const Header: React.FC = () => {
           </Button>
 
           <Button
-            onClick={() => {}}
+            onClick={() => navigate("/sign-in")}
             type="button"
             className="rounded-md border-2 border-white/50 px-4 py-2 text-sm font-semibold text-white"
           >
