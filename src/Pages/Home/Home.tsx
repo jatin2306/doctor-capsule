@@ -40,17 +40,18 @@ const Home = () => {
                 strokeWidth={3.5}
               />
             </div>
-            <Input
-              type="text"
+            <Input label=""
+              labelClassName=""
               value={query}
               onChange={(e) => setQuery(e.target.value)}
+              type="text"
               className="flex-1 bg-transparent text-sm text-gray-700 placeholder:text-gray-400 focus:outline-none sm:text-base"
               placeholder="Search Doctors, Medicines, ..."
             />
             <Button
               onClick={handleSearch}
               type="button"
-              className=" bg-[#F6F6F6] px-6 py-2 text-sm font-medium text-[#0F3C6C] shadow"
+            className="ml-auto bg-[#F6F6F6] px-6 py-2 text-sm font-medium text-[#0F3C6C] shadow flex items-center"
             >
               Search
             </Button>
