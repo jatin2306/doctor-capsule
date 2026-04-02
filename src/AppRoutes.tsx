@@ -11,6 +11,7 @@ const AppRoutes = () => {
                 <Route path="/" element={<Homepage />} />
   
                 <Route path="/sign-in" element={<Onbarding />} />
+                <Route path="/sign-in/:section" element={<Onbarding />} />
             </RouterRoutes>
 
         </>

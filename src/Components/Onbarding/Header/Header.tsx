@@ -1,9 +1,13 @@
-const Header = () => {
+type HeaderProps = {
+  sectionTitle: string;
+};
+
+const Header = ({ sectionTitle }: HeaderProps) => {
   return (
-    <div className="bg-white flex items-start justify-between border-b border-gray-200  py-[12px] px-4" >
+    <div className="bg-white flex items-start justify-between border-b border-gray-200  py-[12px] px-4 sticky top-0 z-10" >
       <div>
         <h1 className="text-2xl font-semibold text-[#1f2937]">
-          Hospital Onboarding
+          {sectionTitle} Onboarding
         </h1>
         <div className="mt-2 flex items-center gap-3">
           <span className="text-xl text-gray-500">Steps 1 to 8</span>
