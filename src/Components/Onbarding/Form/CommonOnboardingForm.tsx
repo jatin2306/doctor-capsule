@@ -1,158 +1,73 @@
-import React from "react";
+import React, { useState } from "react";
 import Input from "../../../Utilities/Input/Input";
 import Select from "../../../Utilities/Select/Select";
-
+import ValidationCard from "../Form-Cards/ValidationCard/ValidationCard";
+import UploadCard from "../Form-Cards/UploadCard/UploadCard";
+import LocationPreviewCard from "../Form-Cards/LocationCard/LocationCard";
+  
 type CommonOnboardingFormProps = {
   section?: string;
   activeStep: number;
 };
 
-type SelectFieldProps = {
-  label: string;
-  placeholder: string;
-  options: string[];
-};
-
-const DisabledTextField = ({
-  label,
-  placeholder,
-}: {
-  label: string;
-  placeholder: string;
-}) => {
-  return (
-    <div>
-      <Input
-        label={label}
-        labelClassName="mb-2 block text-sm font-semibold text-[#111827]"
-        value={""}
-        onChange={() => {}}
-        type="text"
-        className="focus-visible:outline-none bg-gray-50 placeholder:text-gray-300 placeholder:font-medium placeholder:text-sm text-gray-400 w-full px-4 py-2.5 rounded-xl"
-        placeholder={placeholder}
-      />
-    </div>
-  );
-};
-
-const DisabledSelectField = ({
-  label,
-  placeholder,
-  options,
-}: SelectFieldProps) => {
-  return (
-    <div>
-      <Select
-        label={label}
-        labelClassName="mb-2 block text-sm font-semibold text-[#111827]"
-        placeholder={placeholder}
-        className=" focus-visible:outline-none w-full appearance-none rounded-xl bg-gray-50 border border-gray-50 bg-white px-4 py-2.5 text-sm text-gray-400"
-        options={options ?? []}
-      />
-    </div>
-  );
-};
-
-const UploadLogoCard = () => {
-  return (
-    <div className="rounded-xl border-2 border-dashed border-gray-300 bg-white p-5">
-      <div className="flex items-center gap-4">
-        <div className="flex h-10 w-10 items-center justify-center rounded-md bg-[#264F7D] text-white">
-          +
-        </div>
-        <div>
-          <p className="text-sm font-medium text-[#111827]">
-            Upload Hospital Logo
-          </p>
-          <p className="mt-1 text-xs text-gray-400">JPG/PNG - Max-5MB</p>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-const ValidationCard = ({ options }: { options: string[] }) => {
-  return (
-    <div className="rounded-lg border border-gray-200 bg-white">
-      <div className="border-b border-gray-200 px-5 py-5 text-xl font-semibold text-[#111827]">
-        Validation:
-      </div>
-      <ul className="space-y-2 px-5 py-5 text-md text-[#EF4444]">
-        <li className="flex items-center gap-2">
-          <span className="inline-flex p-2.5 h-2 w-2 items-center text-sm justify-center rounded-full bg-[#FF6668]">
-            <span className="text-white text-sm">✓</span>
-          </span>
-          <span className="text-md text-[#FF6668] font-medium ">
-            {" "}
-            Hospital Name{" "}
-          </span>
-          <span className="text-md text-[#FF6668  ] font-medium ">
-            {" "}
-            is Required.
-          </span>
-        </li>
-        <li className="flex items-center gap-2">
-          <span className="inline-flex p-2.5 h-2 w-2 items-center text-sm justify-center rounded-full bg-[#FF6668]">
-            <span className="text-white text-sm">✓</span>
-          </span>
-          <span className="text-md text-[#FF6668] font-medium ">
-            {" "}
-            Legal Name{" "}
-          </span>
-          <span className="text-md text-[#111827] font-medium ">
-            {" "}
-            is Required.
-          </span>
-        </li>
-        <li className="flex items-center gap-2">
-          <span className="inline-flex p-2.5 h-2 w-2 items-center text-sm justify-center rounded-full bg-[#FF6668]">
-            <span className="text-white text-sm">✓</span>
-          </span>
-          <span className="text-md text-black font-medium ">
-            {" "}
-            Invalid Registration Number{" "}
-          </span>
-        </li>
-      </ul>
-    </div>
-  );
-};
-
 const BasicDetailsForm = () => {
   return (
     <div className="grid gap-6 p-10 lg:grid-cols-[2fr_1fr] bg-gray-100">
-      {/* left side: stacked cards */}
       <div className="space-y-6">
         <div className="space-y-4 rounded-lg bg-white p-6">
-          <DisabledTextField
+          <Input
+            labelClassName="mb-2 block text-sm font-semibold text-[#111827]"
+            value={""}
+            onChange={() => {}}
+            type="text"
+            className="focus-visible:outline-none bg-gray-50 placeholder:text-gray-300 placeholder:font-medium placeholder:text-sm text-gray-400 w-full px-4 py-2.5 rounded-xl"
             label="Hospital Name"
             placeholder="K.R. Hospital"
           />
-          <DisabledTextField label="Legal Name" placeholder="K.R. Hospital" />
-          <DisabledSelectField
+          <Input
+            labelClassName="mb-2 block text-sm font-semibold text-[#111827]"
+            value={""}
+            onChange={() => {}}
+            type="text"
+            className="focus-visible:outline-none bg-gray-50 placeholder:text-gray-300 placeholder:font-medium placeholder:text-sm text-gray-400 w-full px-4 py-2.5 rounded-xl"
+            label="Legal Name"
+            placeholder="K.R. Hospital"
+          />
+          <Select
+            labelClassName="mb-2 block text-sm font-semibold text-[#111827]"
+            className="rounded-xl border border-gray-50 px-4 py-2.5 text-sm text-gray-400"
+            options={["Hospital", "Clinic", "Other"]}
             label="Hospital Type"
             placeholder="Select Type"
-            options={["Hospital", "Clinic", "Other"]}
           />
         </div>
 
         <div className="space-y-4 rounded-lg bg-white p-6">
-          <DisabledTextField
+          <Input
+            labelClassName="mb-2 block text-sm font-semibold text-[#111827]"
+            value={""}
+            onChange={() => {}}
+            type="text"
+            className="focus-visible:outline-none bg-gray-50 placeholder:text-gray-300 placeholder:font-medium placeholder:text-sm text-gray-400 w-full px-4 py-2.5 rounded-xl"
             label="Registration Number"
             placeholder="Enter Number"
           />
-          <DisabledSelectField
+          <Select
+            labelClassName="mb-2 block text-sm font-semibold text-[#111827]"
+            className="rounded-xl border border-gray-50 px-4 py-2.5 text-sm text-gray-400"
+            options={["2020", "2021", "2022", "2023", "2024", "2025", "2026"]}
             label="Year Founded"
             placeholder="Select Year"
-            options={["2020", "2021", "2022", "2023", "2024", "2025", "2026"]}
           />
         </div>
       </div>
 
       <div className="space-y-4">
         {/* Card 1: times */}
-        <div className="space-y-4 rounded-lg bg-white p-6">
-          <DisabledSelectField
+        <div className="space-y-4 rounded-lg bg-white p-8">
+          <Select
+            labelClassName="mb-2 block text-sm font-semibold text-[#111827]"
+            className="rounded-xl border border-gray-50 px-4 py-2.5 text-sm text-gray-400"
             label="Opening Time"
             placeholder="Select Time"
             options={[
@@ -170,7 +85,9 @@ const BasicDetailsForm = () => {
               "20:00",
             ]}
           />
-          <DisabledSelectField
+          <Select
+            labelClassName="mb-2 block text-sm font-semibold text-[#111827]"
+            className="rounded-xl border border-gray-50 px-4 py-2.5 text-sm text-gray-400"
             label="Closing Time"
             placeholder="Select Time"
             options={[
@@ -190,13 +107,22 @@ const BasicDetailsForm = () => {
           />
         </div>
 
-        <UploadLogoCard />
+        <UploadCard label="Upload Hospital Logo" maxSize={5} />
 
         <ValidationCard
           options={[
-            "Hospital Name is Required",
-            "Legal Name is Required",
-            "Invalid Registration Number",
+            {
+              label: "Hospital Name",
+              message: "is Required",
+            },
+            {
+              label: "Legal Name",
+              message: "Required",
+            },
+            {
+              label: "",
+              message: "Invalid Registration Number",
+            },
           ]}
         />
       </div>
@@ -204,68 +130,88 @@ const BasicDetailsForm = () => {
   );
 };
 
-const CodeInput = ({ placeholder, disabled }: { placeholder: string, disabled: boolean }) => {
-  return (
-    <Input
-      label=""
-      onChange={() => {}}
-      disabled={disabled}      
-      className="w-full rounded-xl bg-gray-50 px-4 py-2.5 text-sm text-gray-400 placeholder:text-gray-300"
-      placeholder={placeholder}
-      value="" 
-      type="text"
-      labelClassName="hidden"
-      />
-  );
-};
+const inputBaseClass =
+  "focus-visible:outline-none bg-gray-50 placeholder:text-gray-300 placeholder:font-medium placeholder:text-sm text-gray-400 rounded-xl border border-transparent";
+
+
+
+
 
 const ContactsInfoForm = () => {
   return (
     <div className="grid gap-6 p-10 lg:grid-cols-[2fr_1fr] bg-gray-100">
       <div className="space-y-6">
-        {/* Card 1: Name / Role / Email / Phone verification */}
-        <div className="space-y-4 rounded-lg  bg-white p-6">
-          <div className="space-y-4">
-            <DisabledTextField label="Name" placeholder="Enter Name" />
+        <div className="space-y-6 rounded-lg  bg-white p-8">
+          <Input
+            label="Name"
+            value={""}
+            onChange={() => {}}
+            type="text"
+            placeholder="Enter Name"
+            labelClassName="mb-2 block text-sm font-semibold text-[#111827]"
+            className={`${inputBaseClass} w-full px-4 py-2.5`}
+          />
+          <Select
+            labelClassName="mb-2 block text-sm font-semibold text-[#111827]"
+            className="rounded-xl border border-gray-50 px-4 py-2.5 text-sm text-gray-400"
+            options={["Admin", "Doctor", "Staff"]}
+            label="Role"
+            placeholder="Select Role"
+          />
+          <Input
+            labelClassName="mb-2 block text-sm font-semibold text-[#111827]"
+            value={""}
+            variant="verify"
+            codeValue={""}
+            onCodeChange={() => {}}
+            onVerify={() => {}}
+            onResend={() => {}}
+            onChange={() => {}}
+            type="email"
+            className="focus-visible:outline-none bg-gray-50 placeholder:text-gray-300 placeholder:font-medium placeholder:text-sm text-gray-400 w-full px-4 py-2.5 rounded-xl"
+            label="Email"
+            placeholder="Enter Email"
+          />
 
-            <DisabledSelectField
-              label="Role"
-              placeholder="Select Role"
-              options={["Admin", "Doctor", "Staff"]}
-            />
-
-            <DisabledTextField label="Email" placeholder="Enter Email" />
-
-            <div>
-              <DisabledTextField
-                label="Phone Number"
-                placeholder="Enter Phone Number"
-              />
-              <div className="mt-3 grid grid-cols-[1fr_auto] gap-4">
-                <CodeInput placeholder="Enter Code" disabled={false} />
-                <button
-                  type="button"
-                  className="h-10 rounded-md bg-[#4b4b4b] px-6 text-sm font-semibold text-white"
-                >
-                  Verify
-                </button>
-              </div>
-              <div className="mt-2 text-right text-sm">
-                <span className="cursor-default text-[#2f87df] underline">
-                  Resend
-                </span>
-              </div>
-            </div>
-          </div>
+          <Input
+            labelClassName="mb-2 block text-sm font-semibold text-[#111827]"
+            value={""}
+            variant="verify"
+            codeValue={""}
+            onCodeChange={() => {}}
+            onVerify={() => {}}
+            onResend={() => {}}
+            onChange={() => {}}
+            type="text"
+            className="focus-visible:outline-none bg-gray-50 placeholder:text-gray-300 placeholder:font-medium placeholder:text-sm text-gray-400 w-full px-4 py-2.5 rounded-xl"
+            label="Phone Number"
+            placeholder="Enter Phone Number"
+          />
         </div>
 
         {/* Card 2: Alternate Phone + Website */}
         <div className="space-y-4 rounded-lg bg-white p-6">
-          <DisabledTextField
-            label="Alternate Phone*"
-            placeholder="Enter Phone Number"
+          <div>
+            <label className="mb-2 block text-sm font-semibold text-[#111827]">
+              Alternate Phone<span className="text-red-500">*</span>
+            </label>
+            <input
+              type="text"
+              placeholder="Enter Phone Number"
+              className={`${inputBaseClass} w-full px-4 py-2.5`}
+              value=""
+              onChange={() => {}}
+            />
+          </div>
+          <Input
+            labelClassName="mb-2 block text-sm font-semibold text-[#111827]"
+            value={""}
+            onChange={() => {}}
+            type="text"
+            className="focus-visible:outline-none bg-gray-50 placeholder:text-gray-300 placeholder:font-medium placeholder:text-sm text-gray-400 w-full px-4 py-2.5 rounded-xl"
+            label="Website"
+            placeholder="www.your name.com"
           />
-          <DisabledTextField label="Website" placeholder="www.your name.com" />
         </div>
       </div>
 
@@ -273,9 +219,280 @@ const ContactsInfoForm = () => {
       <div className="space-y-4">
         <ValidationCard
           options={[
-            "Email is Required",
-            "Phone Number is Required",
-            "Invalid Code",
+            {
+              label: "",
+              message: "Email format",
+            },
+            {
+              label: "Phone number",
+              message: "length",
+            },
+            {
+              label: "OTP verification",
+              message: "mandatory",
+            },
+          ]}
+        />
+      </div>
+    </div>
+  );
+};
+
+const selectClass =
+  "rounded-xl border border-gray-50 px-4 py-2.5 text-sm text-gray-400";
+
+
+
+const CheckField = ({
+  children,
+  defaultChecked,
+}: {
+  children: React.ReactNode;
+  defaultChecked?: boolean;
+}) => (
+  <label className="flex cursor-pointer items-center gap-2.5">
+    <input
+      type="checkbox"
+      defaultChecked={defaultChecked}
+      className="h-4 w-4 shrink-0 rounded border-gray-300 text-[#2f87df] accent-[#324664]"
+    />
+    <span className="text-sm font-medium text-[#111827]">{children}</span>
+  </label>
+);
+
+const InfoStructureForm = () => {
+  const [description, setDescription] = useState("");
+  const descMax = 500;
+
+  return (
+    <div className="space-y-6 bg-gray-100 p-10">
+      <div className="grid gap-6 lg:grid-cols-2">
+        <div className="space-y-6">
+          <div className="rounded-lg bg-white p-6">
+            <h3 className="mb-4 text-base font-semibold text-[#111827]">
+              Facility
+            </h3>
+            <div className="grid grid-cols-1 gap-x-10 gap-y-3 sm:grid-cols-2">
+              <CheckField defaultChecked>24/7 Emergency</CheckField>
+              <CheckField defaultChecked>ICU Available</CheckField>
+              <CheckField defaultChecked>Pharmacy</CheckField>
+              <CheckField defaultChecked>Parking</CheckField>
+              <CheckField defaultChecked>Ambulance</CheckField>
+            </div>
+          </div>
+
+          <div className="rounded-lg bg-white p-6">
+            <h3 className="mb-4 text-base font-semibold text-[#111827]">
+              Operation Units
+            </h3>
+            <Input
+              labelClassName="mb-2 block text-sm font-semibold text-[#111827]"
+              value={""}
+              onChange={() => {}}
+              type="text"
+              className="focus-visible:outline-none w-full rounded-xl bg-gray-50 px-4 py-2.5 text-sm text-gray-400 placeholder:text-sm placeholder:font-medium placeholder:text-gray-300"
+              label="Operation Theatres (Numbers)"
+              placeholder="Enter Number"
+            />
+          </div>
+
+          <div className="rounded-lg bg-white p-6">
+            <h3 className="mb-4 text-base font-semibold text-[#111827]">
+              Equipment
+            </h3>
+            <div className="grid grid-cols-1 gap-x-10 gap-y-3 sm:grid-cols-2">
+              <CheckField defaultChecked>MRI</CheckField>
+              <CheckField>CT Scan</CheckField>
+              <CheckField>Dialysis</CheckField>
+              <CheckField>Ventilators</CheckField>
+            </div>
+          </div>
+        </div>
+
+        <div className="space-y-6">
+          <div className="rounded-lg bg-white p-6">
+            <h3 className="mb-4 text-base font-semibold text-[#111827]">
+              Bed Capacity
+            </h3>
+            <div className="space-y-4">
+              <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+                <span className="shrink-0 text-sm font-semibold text-[#111827]">
+                  Total Beds:
+                </span>
+                <input
+                  type="text"
+                  className={`${inputBaseClass} w-full min-w-0 flex-1 px-4 py-2.5 sm:max-w-[240px]`}
+                  placeholder=""
+                  value=""
+                  onChange={() => {}}
+                />
+              </div>
+              <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+                <span className="shrink-0 text-sm font-semibold text-[#111827]">
+                  ICU Beds:
+                </span>
+                <input
+                  type="text"
+                  className={`${inputBaseClass} w-full min-w-0 flex-1 px-4 py-2.5 sm:max-w-[240px]`}
+                  placeholder=""
+                  value=""
+                  onChange={() => {}}
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="rounded-lg bg-white p-6">
+            <h3 className="mb-4 text-base font-semibold text-[#111827]">
+              Departments
+            </h3>
+            <div className="grid grid-cols-1 gap-x-10 gap-y-3 sm:grid-cols-2">
+              <CheckField defaultChecked>Cardiology</CheckField>
+              <CheckField>Neurology</CheckField>
+              <CheckField>Orthopedics</CheckField>
+              <CheckField>Pediatrics</CheckField>
+              <CheckField>Oncology</CheckField>
+              <CheckField>ENT</CheckField>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <UploadCard label="Upload Floor Plan" maxSize={5} />
+            <UploadCard label="Upload Certificate" maxSize={5} />
+          </div>
+        </div>
+      </div>
+
+      <div className="rounded-lg bg-white p-6">
+        <h3 className="mb-4 text-base font-semibold text-[#111827]">
+          Description
+        </h3>
+        <div className="relative">
+          <textarea
+            value={description}
+            onChange={(e) =>
+              setDescription(e.target.value.slice(0, descMax))
+            }
+            maxLength={descMax}
+            rows={5}
+            placeholder="Brief Description of the medical facility..."
+            className={`${inputBaseClass} min-h-[140px] w-full resize-y px-4 py-3 pb-9 placeholder:italic`}
+          />
+          <span className="pointer-events-none absolute bottom-3 right-4 text-xs text-gray-400">
+            {description.length}/{descMax}
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const AddressDetailsForm = () => {
+  return (
+    <div className="grid gap-6 p-10 lg:grid-cols-[2fr_1fr] bg-gray-100">
+      <div className="space-y-6">
+        <div className="space-y-4 rounded-lg bg-white p-6">
+          <Select
+            labelClassName="mb-2 block text-sm font-semibold text-[#111827]"
+            className={selectClass}
+            options={[
+              "Select Country",
+              "India",
+              "United States",
+              "United Kingdom",
+              "Singapore",
+            ]}
+            label="Country"
+            placeholder="Select Country"
+          />
+          <Select
+            labelClassName="mb-2 block text-sm font-semibold text-[#111827]"
+            className={selectClass}
+            options={[
+              "Select State",
+              "California",
+              "Texas",
+              "Maharashtra",
+              "Karnataka",
+            ]}
+            label="State"
+            placeholder="Select State"
+          />
+          <Select
+            labelClassName="mb-2 block text-sm font-semibold text-[#111827]"
+            className={selectClass}
+            options={[
+              "Select City",
+              "Mumbai",
+              "Bengaluru",
+              "Singapore",
+              "New York",
+            ]}
+            label="City"
+            placeholder="Select City"
+          />
+          <Input
+            labelClassName="mb-2 block text-sm font-semibold text-[#111827]"
+            value={""}
+            onChange={() => {}}
+            type="text"
+            className="focus-visible:outline-none bg-gray-50 placeholder:text-gray-300 placeholder:font-medium placeholder:text-sm text-gray-400 w-full px-4 py-2.5 rounded-xl"
+            label="Postal Code"
+            placeholder="Enter Code"
+          />
+
+          <div>
+            <div className="mb-2 flex items-center justify-between gap-2">
+              <span className="text-sm font-semibold text-[#111827]">
+                Street Address
+              </span>
+              <button
+                type="button"
+                className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md text-xl font-medium text-[#111827] hover:bg-gray-100"
+                aria-label="Add street address line"
+              >
+                +
+              </button>
+            </div>
+            <textarea
+              rows={3}
+              placeholder="123-ABC Residency, Near street Opera road,"
+              className={`${inputBaseClass} min-h-[96px] w-full resize-y px-4 py-2.5`}
+              defaultValue=""
+            />
+          </div>
+
+          <div>
+            <div className="mb-2 flex items-center justify-between gap-2">
+              <span className="text-sm font-semibold text-[#111827]">
+                Add Branch
+              </span>
+              <button
+                type="button"
+                className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md text-xl font-medium text-[#111827] hover:bg-gray-100"
+                aria-label="Add branch"
+              >
+                +
+              </button>
+            </div>
+            <input
+              type="text"
+              placeholder="Add Branch Name"
+              className={`${inputBaseClass} w-full px-4 py-2.5`}
+              value=""
+              onChange={() => {}}
+            />
+          </div>
+        </div>
+      </div>
+
+      <div className="space-y-4">
+        <LocationPreviewCard />
+        <ValidationCard
+          options={[
+            { label: "", message: "Email format" },
+            { label: "Phone number", message: "length" },
+            { label: "OTP verification", message: "mandatory" },
           ]}
         />
       </div>
@@ -287,68 +504,16 @@ const CommonOnboardingForm: React.FC<CommonOnboardingFormProps> = ({
   section,
   activeStep,
 }) => {
-  // For now, we match the SS for the first step; other steps reuse the same layout.
-  // `section` is kept so we can customize labels later (Hospitals/Clinics/etc).
   void section;
 
   if (activeStep === 0) return <BasicDetailsForm />;
   if (activeStep === 1) return <ContactsInfoForm />;
+  if (activeStep === 2) return <AddressDetailsForm />;
+  if (activeStep === 3) return <InfoStructureForm />;
 
   return (
-    <div className="grid gap-6 p-8 lg:grid-cols-[2fr_1fr]">
-      <div className="space-y-4">
-        <DisabledTextField label="Hospital Name" placeholder="—" />
-        <DisabledTextField label="Legal Name" placeholder="—" />
-        <DisabledSelectField
-          label="Hospital Type"
-          placeholder="Select Type"
-          options={["Hospital", "Clinic", "Other"]}
-        />
-      </div>
-      <div className="space-y-4">
-        <DisabledSelectField
-          label="Opening Time"
-          placeholder="Select Time"
-          options={[
-            "09:00",
-            "10:00",
-            "11:00",
-            "12:00",
-            "13:00",
-            "14:00",
-            "15:00",
-            "16:00",
-            "17:00",
-            "18:00",
-            "19:00",
-            "20:00",
-          ]}
-        />
-        <DisabledSelectField
-          label="Closing Time"
-          placeholder="Select Time"
-          options={[
-            "09:00",
-            "10:00",
-            "11:00",
-            "12:00",
-            "13:00",
-            "14:00",
-            "15:00",
-            "16:00",
-            "17:00",
-            "18:00",
-            "19:00",
-            "20:00",
-          ]}
-        />
-        <UploadLogoCard />
-        <ValidationCard
-          options={[
-            "Hospital Name is Required. Legal Name is Required. Invalid Registration Number.",
-          ]}
-        />
-      </div>
+    <div className="bg-gray-100 p-10 text-center text-sm text-gray-500">
+      Step content for this section is not available yet.
     </div>
   );
 };
