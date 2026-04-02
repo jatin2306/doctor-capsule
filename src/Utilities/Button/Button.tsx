@@ -3,11 +3,12 @@ interface ButtonProps {
     onClick: () => void;
     className?: string;
     type?: "button" | "submit" | "reset";
+    disabled?: boolean;
 }
-const Button = ({ children, onClick, className, type }: ButtonProps) => {
+const Button = ({ children, onClick, className, type, disabled }: ButtonProps) => {
 
     return (
-        <button className={`${className}`} onClick={onClick} type={type}>
+        <button className={`${className}`} onClick={onClick} type={type} disabled={disabled}>
             {children}
         </button>
     );
