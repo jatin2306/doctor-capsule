@@ -6,11 +6,13 @@ interface SelectProps {
   labelClassName: string;
   className: string;
   options: string[];
+  disabled?: boolean;
 }
 const Select = ({
   label,
   labelClassName,
   placeholder,
+  disabled,
   className,
   options,
 }: SelectProps) => {
@@ -19,7 +21,8 @@ const Select = ({
       <label className={`${labelClassName}`}> {label}</label>
       <div className="relative">
         <select
-          className={`w-full appearance-none rounded-md border border-gray-200 bg-white px-4 py-2.5 pr-10 text-sm text-gray-400 ${className}`}
+          className={`w-full appearance-none rounded-md  bg-gray-50 px-4 py-2.5 pr-10 text-sm text-gray-400 focus-visible:outline-none ${className}`}
+          disabled={disabled}
         >
           {options.map((option, index) => (
             <option key={index} value={option}>

@@ -14,7 +14,7 @@ const Form = () => {
       "Services",
       "Document",
     ],
-    []
+    [],
   );
 
   const [activeIndex, setActiveIndex] = useState(0);
@@ -64,20 +64,15 @@ const Form = () => {
             </div>
           </div>
 
-          <CommonOnboardingForm
-            section={section}
-            activeStep={activeIndex}
-          />
+          <CommonOnboardingForm section={section} activeStep={activeIndex} />
 
           <div className="flex justify-end p-8 pt-0 bg-gray-100">
             <Button
               type="button"
-              className="rounded-xl bg-[#2f87df] px-14 py-3 text-xl font-semibold text-white hover:bg-[#2576c8] disabled:cursor-not-allowed disabled:opacity-50"
+              className="rounded-xl bg-[#2f87df] px-14 py-3 text-sm font-semibold text-white hover:bg-[#2576c8] disabled:cursor-not-allowed disabled:opacity-50"
               disabled={activeIndex >= steps.length - 1}
               onClick={() =>
-                setActiveIndex((prev) =>
-                  Math.min(prev + 1, steps.length - 1)
-                )
+                setActiveIndex((prev) => Math.min(prev + 1, steps.length - 1))
               }
             >
               NEXT
