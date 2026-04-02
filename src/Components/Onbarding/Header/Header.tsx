@@ -7,7 +7,7 @@ type HeaderProps = {
 
 const Header = ({ sectionTitle }: HeaderProps) => {
   return (
-    <div className="bg-white flex items-start justify-between border-b border-gray-200  py-[12px] px-4 sticky top-0 z-10 border-l-2 border-gray-300">
+    <div className="bg-white flex items-start justify-between   py-[14px] px-4 sticky top-0 z-10  border-l-2 border-gray-300">
       <div className="pl-4">
         <h1 className="text-2xl font-semibold text-[#1f2937]">
           {sectionTitle} Onboarding
