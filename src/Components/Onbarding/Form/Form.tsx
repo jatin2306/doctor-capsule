@@ -1,24 +1,17 @@
-import React, { useMemo, useState } from "react";
+import React from "react";
 import { useParams } from "react-router-dom";
 import CommonOnboardingForm from "./CommonOnboardingForm";
 import Button from "../../../Utilities/Button/Button";
 
-const Form = () => {
-  const steps = useMemo(
-    () => [
-      "Basic Details",
-      "Contacts Info",
-      "Address",
-      "Info structure",
-      "Doctors",
-      "Services",
-      "Document",
-    ],
-    [],
-  );
+type FormProps = {
+  steps: readonly string[];
+  activeIndex: number;
+  onActiveIndexChange: (index: number) => void;
+};
 
-  const [activeIndex, setActiveIndex] = useState(0);
+const Form = ({ steps, activeIndex, onActiveIndexChange }: FormProps) => {
   const { section } = useParams();
+  const stepList = [...steps];
 
   return (
     <div className="min-h-full bg-[#f2f2f2]">
@@ -28,16 +21,16 @@ const Form = () => {
             <div className="relative flex items-start justify-between px-1">
               <div className="absolute left-0 right-0 top-[14px] h-[2px] bg-gray-200" />
               <div
-                className="absolute left-0 top-[14px] h-[2px] bg-[#2f87df]"
+                className="absolute left-0 top-[14px] h-[2px] bg-[#2f87df] transition-[width] duration-300 ease-out"
                 style={{
                   width:
-                    steps.length > 1
-                      ? `${((activeIndex + 1) / steps.length) * 100}%`
+                    stepList.length > 1
+                      ? `${((activeIndex + 1) / stepList.length) * 100}%`
                       : "0%",
                 }}
               />
 
-              {steps.map((step, index) => {
+              {stepList.map((step, index) => {
                 const isDone = index <= activeIndex;
                 return (
                   <div
@@ -66,13 +59,15 @@ const Form = () => {
 
           <CommonOnboardingForm section={section} activeStep={activeIndex} />
 
-          <div className="flex justify-end p-8 pt-0 bg-gray-100">
+          <div className="flex justify-end bg-gray-100 p-8 pt-0">
             <Button
               type="button"
               className="rounded-xl bg-[#2f87df] px-14 py-3 text-sm font-semibold text-white hover:bg-[#2576c8] disabled:cursor-not-allowed disabled:opacity-50"
-              disabled={activeIndex >= steps.length - 1}
+              disabled={activeIndex >= stepList.length - 1}
               onClick={() =>
-                setActiveIndex((prev) => Math.min(prev + 1, steps.length - 1))
+                onActiveIndexChange(
+                  Math.min(activeIndex + 1, stepList.length - 1),
+                )
               }
             >
               NEXT

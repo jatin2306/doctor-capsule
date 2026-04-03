@@ -12,7 +12,7 @@ const ValidationCard = ({ options }: { options: ValidationItem[] }) => {
 
       <ul className="space-y-3 px-5 py-6 pb-6 ">
         {options.map((item, index) => (
-          <li key={index} className="flex items-center gap-2 text-md">
+          <li key={index} className="flex items-center gap-2 text-lg">
             {/* Red circle check */}
             <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[#FF6668]">
               <span className="text-white text-xs">✓</span>

@@ -3,21 +3,38 @@ import Button from "../../../Utilities/Button/Button";
 
 type HeaderProps = {
   sectionTitle: string;
+  steps: readonly string[];
+  activeStepIndex: number;
 };
 
-const Header = ({ sectionTitle }: HeaderProps) => {
+const Header = ({ sectionTitle, steps, activeStepIndex }: HeaderProps) => {
+  const total = steps.length;
+  const current = Math.min(activeStepIndex, Math.max(0, total - 1));
+  const stepNumber = total > 0 ? current + 1 : 0;
+  const progressPercent =
+    total > 0 ? Math.round(((current + 1) / total) * 100) : 0;
+
   return (
-    <div className="bg-white flex items-start justify-between   py-[14px] px-4 sticky top-0 z-10  border-l-2 border-gray-300">
+    <div className="sticky top-0 z-10 flex items-start justify-between border-l-2 border-gray-300 bg-white px-4 py-[14px]">
       <div className="pl-4">
-        <h1 className="text-2xl font-semibold text-[#1f2937]">
+        <h1 className="text-xl font-semibold text-[#1f2937]">
           {sectionTitle} Onboarding
         </h1>
-        <div className="mt-1 ml-1 flex items-center gap-3">
-          <span className="text-lg text-gray-500">Steps 1 to 8</span>
-          <div className="h-1.5 w-52 rounded-full bg-gray-300">
-            <div className="h-1.5 w-[20%] rounded-full bg-[#2f87df]" />
+ 
+
+        <div className="mt-2 flex flex-wrap items-center gap-3 ml-0.5">
+          <span className="text-sm text-gray-500">
+            Step {stepNumber} of {total}
+          </span>
+          <div className="h-1.5 min-w-[8rem] flex-1 max-w-xs rounded-full bg-gray-200">
+            <div
+              className="h-1.5 rounded-full bg-[#2f87df] transition-[width] duration-300 ease-out"
+              style={{ width: `${progressPercent}%` }}
+            />
           </div>
-          <span className="text-xl text-gray-600">20%</span>
+          <span className="text-sm font-medium tabular-nums text-gray-600">
+            {progressPercent}%
+          </span>
         </div>
       </div>
       <Button

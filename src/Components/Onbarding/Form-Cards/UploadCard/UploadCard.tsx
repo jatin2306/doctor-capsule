@@ -1,11 +1,56 @@
 import React, { useRef, useState } from "react";
+import { twMerge } from "tailwind-merge";
 
-interface UploadCardProps {
+export interface UploadCardProps {
   label: string;
   maxSize: number;
+  /** Merged with default outer card styles */
+  className?: string;
+  /** Plus / icon square */
+  iconClassName?: string;
+  /** Main label line */
+  labelClassName?: string;
+  /** Hint line under label (file type / selected name) */
+  hintClassName?: string;
+  /** Row that wraps icon + text (or icon+text group when Preview is shown) */
+  innerClassName?: string;
+  accept?: string;
+  /** When false, only the title line is shown (no file-type row). Default true. */
+  showHintLine?: boolean;
+  /** Appends a red asterisk after the label (e.g. required photo). */
+  required?: boolean;
+  /** Left side of hint before " - Max-{maxSize}MB" (default "JPG/PNG") */
+  formatsHint?: string;
+  /** Optional Preview control on the right; click does not open file picker */
+  showPreviewButton?: boolean;
+  previewDisabled?: boolean;
+  onPreviewClick?: () => void;
 }
 
-const UploadCard = ({ label, maxSize }: UploadCardProps) => {
+const defaultRoot =
+  "cursor-pointer rounded-xl border-2 border-dashed border-gray-300 bg-white p-6 transition-colors hover:border-gray-400";
+const defaultIcon =
+  "flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-[#264F7D] text-lg font-medium text-white";
+const defaultLabel = "text-lg font-medium text-[#111827]";
+const defaultHint = "mt-1 text-xs text-gray-400";
+const defaultInner = "flex items-center gap-4";
+
+const UploadCard = ({
+  label,
+  maxSize,
+  className,
+  iconClassName,
+  labelClassName,
+  hintClassName,
+  innerClassName,
+  accept = ".jpg,.jpeg,.png,image/jpeg,image/png",
+  showHintLine = true,
+  required = false,
+  formatsHint = "JPG/PNG",
+  showPreviewButton = false,
+  previewDisabled = true,
+  onPreviewClick,
+}: UploadCardProps) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [fileName, setFileName] = useState("");
 
@@ -19,9 +64,32 @@ const UploadCard = ({ label, maxSize }: UploadCardProps) => {
     setFileName(file.name);
   };
 
+  const hintText =
+    fileName || `${formatsHint} - Max-${maxSize}MB`;
+
+  const iconEl = (
+    <div className={twMerge(defaultIcon, iconClassName)}>+</div>
+  );
+
+  const textBlock = (
+    <div className="min-w-0 flex-1">
+      <p className={twMerge(defaultLabel, labelClassName)}>
+        {label}
+        {required ? (
+          <span className="text-red-500" aria-hidden>
+            *
+          </span>
+        ) : null}
+      </p>
+      {showHintLine ? (
+        <p className={twMerge(defaultHint, hintClassName)}>{hintText}</p>
+      ) : null}
+    </div>
+  );
+
   return (
     <div
-      className="cursor-pointer rounded-xl border-2 border-dashed border-gray-300 bg-white p-6"
+      className={twMerge(defaultRoot, className)}
       onClick={handleCardClick}
       role="button"
       tabIndex={0}
@@ -35,21 +103,47 @@ const UploadCard = ({ label, maxSize }: UploadCardProps) => {
       <input
         ref={fileInputRef}
         type="file"
-        accept=".jpg,.jpeg,.png,image/jpeg,image/png"
+        accept={accept}
         className="hidden"
         onChange={handleFileChange}
       />
 
-      <div className="flex items-center gap-4">
-        <div className="flex h-10 w-10 items-center justify-center rounded-md bg-[#264F7D] text-white">
-          +
-        </div>
-        <div>
-          <p className="text-sm font-medium text-[#111827]">{label}</p>
-          <p className="mt-1 text-xs text-gray-400">
-            {fileName || `JPG/PNG - Max-${maxSize}MB`}
-          </p>
-        </div>
+      <div
+        className={twMerge(
+          defaultInner,
+          showPreviewButton && "w-full justify-between gap-4",
+          innerClassName,
+        )}
+      >
+        {showPreviewButton ? (
+          <div className="flex min-w-0 flex-1 items-center gap-4">
+            {iconEl}
+            {textBlock}
+          </div>
+        ) : (
+          <>
+            {iconEl}
+            {textBlock}
+          </>
+        )}
+
+        {showPreviewButton ? (
+          <button
+            type="button"
+            disabled={previewDisabled}
+            onClick={(e) => {
+              e.stopPropagation();
+              onPreviewClick?.();
+            }}
+            className={twMerge(
+              "shrink-0 rounded-lg border border-gray-200 bg-gray-50 px-4 py-2 text-sm font-medium text-gray-500",
+              previewDisabled && "cursor-not-allowed opacity-70",
+              !previewDisabled && "cursor-pointer hover:bg-gray-100",
+            )}
+          >
+            Preview
+          </button>
+        ) : null}
       </div>
     </div>
   );

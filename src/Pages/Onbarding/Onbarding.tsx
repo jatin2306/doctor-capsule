@@ -1,7 +1,9 @@
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import Sidebar from "../../Components/Onbarding/Sidebar/Sidebar";
 import Form from "../../Components/Onbarding/Form/Form";
 import Header from "../../Components/Onbarding/Header/Header";
-import { useParams } from "react-router-dom";
+import { ONBOARDING_STEPS } from "../../Components/Onbarding/onboardingSteps";
 
 const sectionTitleMap: Record<string, string> = {
   hospitals: "Hospital",
@@ -16,14 +18,30 @@ const sectionTitleMap: Record<string, string> = {
 
 const Onbarding = () => {
   const { section } = useParams();
-  const sectionTitle = section ? sectionTitleMap[section] ?? "Hospital" : "Hospital";
+  const sectionTitle = section
+    ? (sectionTitleMap[section] ?? "Hospital")
+    : "Hospital";
+
+  const [activeStep, setActiveStep] = useState(0);
+
+  useEffect(() => {
+    setActiveStep(0);
+  }, [section]);
 
   return (
     <div className="flex h-screen overflow-hidden">
       <Sidebar />
       <div className="flex-1 overflow-y-auto">
-        <Header sectionTitle={sectionTitle} />
-        <Form />
+        <Header
+          sectionTitle={sectionTitle}
+          steps={ONBOARDING_STEPS}
+          activeStepIndex={activeStep}
+        />
+        <Form
+          steps={ONBOARDING_STEPS}
+          activeIndex={activeStep}
+          onActiveIndexChange={setActiveStep}
+        />
       </div>
     </div>
   );

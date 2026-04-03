@@ -26,7 +26,7 @@ const Sidebar = () => {
   ];
   return (
     <aside className="h-screen w-[290px] shrink-0 bg-[#2f87df]">
-      <div className="flex border-b bg-white border-white/20 p-8 justify-center items-center text-xl font-semibold">
+      <div className="flex border-b bg-white border-white/20 p-7 justify-center items-center text-xl font-semibold">
         My Doctor Capsule
       </div>
 

@@ -1,21 +1,29 @@
 interface InputProps {
-  label: string;
+  label?: string;
   placeholder?: string;
   value?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   type?: string;
 
-  variant?: "default" | "verify";
+  variant?: "default" | "verify" | "checkbox";
 
   className?: string;
   labelClassName?: string;
   disabled?: boolean;
 
+  // verify props
   codeValue?: string;
   onCodeChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onVerify?: () => void;
   onResend?: () => void;
+
+  // checkbox props
+  checked?: boolean;
+  defaultChecked?: boolean;
+  onCheckboxChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  children?: React.ReactNode;
 }
+
 const Input = ({
   label,
   placeholder,
@@ -31,11 +39,17 @@ const Input = ({
   onCodeChange,
   onVerify,
   onResend,
+
+  checked,
+  defaultChecked,
+  onCheckboxChange,
+  children,
 }: InputProps) => {
   return (
     <div className="space-y-2">
-      <label className={labelClassName}>{label}</label>
+      {label && <label className={labelClassName}>{label}</label>}
 
+      {/* DEFAULT INPUT */}
       {variant === "default" && (
         <input
           className={className}
@@ -47,6 +61,7 @@ const Input = ({
         />
       )}
 
+      {/* VERIFY INPUT */}
       {variant === "verify" && (
         <div className="flex flex-col gap-3 md:flex-row md:items-start">
           <input
@@ -83,6 +98,21 @@ const Input = ({
             </button>
           </div>
         </div>
+      )}
+
+      {variant === "checkbox" && (
+        <label className="flex cursor-pointer items-center gap-2.5">
+          <input
+            type="checkbox"
+            checked={checked}
+            defaultChecked={defaultChecked}
+            onChange={onCheckboxChange}
+            className={`h-4 w-4 shrink-0 rounded-md border border-gray-300 text-[#2f87df] accent-[#324664] ${className}`}
+          />
+          <span className="text-sm font-semibold text-[#111827]">
+            {children}
+          </span>
+        </label>
       )}
     </div>
   );
