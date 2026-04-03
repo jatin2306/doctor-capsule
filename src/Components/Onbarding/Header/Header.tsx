@@ -1,5 +1,6 @@
 import { SearchIcon } from "../../../Assets/SVG/Index";
 import Button from "../../../Utilities/Button/Button";
+import { Icon } from "@iconify/react";
 
 type HeaderProps = {
   sectionTitle: string;
@@ -7,8 +8,8 @@ type HeaderProps = {
 
 const Header = ({ sectionTitle }: HeaderProps) => {
   return (
-    <div className="bg-white flex items-start justify-between   py-[14px] px-4 sticky top-0 z-10  border-l-2 border-gray-300">
-      <div className="pl-4">
+    <div className="bg-white flex items-center justify-between border-b border-gray-200  py-[12px] px-4 sticky top-0 z-10">
+      <div>
         <h1 className="text-2xl font-semibold text-[#1f2937]">
           {sectionTitle} Onboarding
         </h1>
@@ -20,13 +21,17 @@ const Header = ({ sectionTitle }: HeaderProps) => {
           <span className="text-xl text-gray-600">20%</span>
         </div>
       </div>
-      <Button
-        onClick={() => {}}
+      <button
         type="button"
-        className="rounded-full p-2 text-5xl text-gray-500"
+        className="rounded-full p-3 bg-[#FAFAFA] text-center"
       >
-        <SearchIcon className="h-8 w-6" stroke="#9CA3AF" strokeWidth={3.5} />
-      </Button>
+        <Icon
+          icon="material-symbols:search-rounded"
+          width="32"
+          height="32"
+          color="#808389"
+        />
+      </button>
     </div>
   );
 };
