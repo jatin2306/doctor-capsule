@@ -1,10 +1,12 @@
+import { Icon } from "@iconify/react";
+
 type HeaderProps = {
   sectionTitle: string;
 };
 
 const Header = ({ sectionTitle }: HeaderProps) => {
   return (
-    <div className="bg-white flex items-start justify-between border-b border-gray-200  py-[12px] px-4 sticky top-0 z-10" >
+    <div className="bg-white flex items-center justify-between border-b border-gray-200  py-[12px] px-4 sticky top-0 z-10">
       <div>
         <h1 className="text-2xl font-semibold text-[#1f2937]">
           {sectionTitle} Onboarding
@@ -17,8 +19,16 @@ const Header = ({ sectionTitle }: HeaderProps) => {
           <span className="text-xl text-gray-600">20%</span>
         </div>
       </div>
-      <button type="button" className="rounded-full p-2 text-5xl text-gray-500">
-        ⌕
+      <button
+        type="button"
+        className="rounded-full p-3 bg-[#FAFAFA] text-center"
+      >
+        <Icon
+          icon="material-symbols:search-rounded"
+          width="32"
+          height="32"
+          color="#808389"
+        />
       </button>
     </div>
   );

@@ -1,36 +1,13 @@
-const Form = () => {
-  const steps = [
-    "Hospital Name",
-    "Legal Name",
-    "Hospital Type",
-    "Registration Number",
-    "Year Founded",
-  ];
+import { useState } from "react";
+import Stepper from "../Stepper/Stepper";
 
+const Form = ({ steps }: { steps: string[] }) => {
+  const [activeStep, setActiveStep] = useState(3);
   return (
     <div className="min-h-full bg-[#f2f2f2] p-4 md:p-6">
       <div className="mx-auto w-full max-w-[1400px] overflow-hidden border border-gray-200 bg-white">
         <main className="bg-[#f7f7f7]">
-        
-
-          <div className="border-b border-gray-200 bg-[#f5f5f5] px-8 py-6">
-            <div className="grid grid-cols-7 gap-6">
-              {steps.map((step, index) => (
-                <div key={step} className="text-center">
-                  <div className="mx-auto mb-2 h-4 w-4 rounded-full bg-[#2f87df]/20">
-                    {index === 0 && (
-                      <div className="h-4 w-4 rounded-full bg-[#2f87df]" />
-                    )}
-                  </div>
-                  <p
-                    className={`text-2xl ${index === 0 ? "font-semibold text-[#111827]" : "text-gray-400"}`}
-                  >
-                    {index + 1}. {step}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
+          <Stepper steps={steps} activeStep={activeStep} />
 
           <div className="grid gap-4 p-8 lg:grid-cols-[2fr_1fr]">
             <div className="space-y-4">
