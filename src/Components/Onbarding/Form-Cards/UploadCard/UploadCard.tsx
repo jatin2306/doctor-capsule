@@ -25,13 +25,17 @@ export interface UploadCardProps {
   showPreviewButton?: boolean;
   previewDisabled?: boolean;
   onPreviewClick?: () => void;
+  /** Icon above text, both centered in the card (vertical + horizontal). */
+  centered?: boolean;
+  /** Called after the user picks a file (or clears). For parent-driven previews. */
+  onFileSelected?: (file: File | null) => void;
 }
 
 const defaultRoot =
   "cursor-pointer rounded-xl border-2 border-dashed border-gray-300 bg-white p-6 transition-colors hover:border-gray-400";
 const defaultIcon =
-  "flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-[#264F7D] text-lg font-medium text-white";
-const defaultLabel = "text-lg font-medium text-[#111827]";
+  "flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-[#264F7D] text-base font-medium text-white";
+const defaultLabel = "text-base font-medium text-[#111827]";
 const defaultHint = "mt-1 text-xs text-gray-400";
 const defaultInner = "flex items-center gap-4";
 
@@ -50,6 +54,8 @@ const UploadCard = ({
   showPreviewButton = false,
   previewDisabled = true,
   onPreviewClick,
+  centered = false,
+  onFileSelected,
 }: UploadCardProps) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [fileName, setFileName] = useState("");
@@ -60,8 +66,13 @@ const UploadCard = ({
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
-    if (!file) return;
+    if (!file) {
+      setFileName("");
+      onFileSelected?.(null);
+      return;
+    }
     setFileName(file.name);
+    onFileSelected?.(file);
   };
 
   const hintText =
@@ -72,7 +83,13 @@ const UploadCard = ({
   );
 
   const textBlock = (
-    <div className="min-w-0 flex-1">
+    <div
+      className={twMerge(
+        "min-w-0",
+        !centered && "flex-1",
+        centered && "w-full text-center",
+      )}
+    >
       <p className={twMerge(defaultLabel, labelClassName)}>
         {label}
         {required ? (
@@ -111,6 +128,8 @@ const UploadCard = ({
       <div
         className={twMerge(
           defaultInner,
+          centered &&
+            "w-full flex-1 flex-col items-center justify-center gap-3 text-center",
           showPreviewButton && "w-full justify-between gap-4",
           innerClassName,
         )}

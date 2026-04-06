@@ -15,7 +15,7 @@ const Header = ({ sectionTitle, steps, activeStepIndex }: HeaderProps) => {
     total > 0 ? Math.round(((current + 1) / total) * 100) : 0;
 
   return (
-    <div className="sticky top-0 z-10 flex items-start justify-between border-l-2 border-gray-300 bg-white px-4 py-[14px]">
+    <div className="sticky top-0 z-10 flex shrink-0 items-start justify-between border-l-2 border-gray-300 bg-white px-4 py-[14px]">
       <div className="pl-4">
         <h1 className="text-xl font-semibold text-[#1f2937]">
           {sectionTitle} Onboarding
