@@ -14,8 +14,22 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+
+    // ─── Added for @ alias imports ─────────────────────────
+    "baseUrl": "src",
+    "paths": {
+      "@Assets/*": ["Assets/*"],
+      "@Auth/*": ["auth/*"],
+      "@Components/*": ["Components/*"],
+      "@Core/*": ["core/*"],
+      "@Config/*": ["core/config/*"],
+      "@Pages/*": ["Pages/*"],
+      "@CSS/*": ["CSS/*"],
+      "@Store/*": ["store/*"],
+      "@Shared/*": ["shared/*"],
+      "@Utilities/*": ["Utilities/*"]
+    }
   },
   "include": ["src"]
 }
-

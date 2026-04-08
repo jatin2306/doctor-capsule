@@ -8,11 +8,13 @@ const Header: React.FC = () => {
   return (
     <div className="w-full border-white/50 pt-4">
       <div className="mx-auto mt-3 flex max-w-7xl items-center justify-between gap-8 px-4 pb-4">
-        <div className="text-3xl font-medium text-[#DEF0FF]">My Doctor Capsule</div>
+        <div className="text-3xl font-medium text-[#DEF0FF]">
+          My Doctor Capsule
+        </div>
 
         <div className="flex items-center gap-3">
           <Button
-            onClick={() => {}}
+            onClick={() => navigate("/sign-up")}
             type="button"
             className="rounded-md bg-white/90 px-4 py-2 text-sm font-semibold text-[#2b87de]"
           >
@@ -33,4 +35,3 @@ const Header: React.FC = () => {
 };
 
 export default Header;
-
